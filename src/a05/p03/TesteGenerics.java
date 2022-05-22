@@ -1,7 +1,5 @@
 package a05.p03;
 
-import a04.Aluno;
-
 public class TesteGenerics {
 
     public static void main(String[] args) {

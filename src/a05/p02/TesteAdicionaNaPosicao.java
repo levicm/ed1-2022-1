@@ -1,7 +1,5 @@
 package a05.p02;
 
-import a04.Aluno;
-
 public class TesteAdicionaNaPosicao {
 
     public static void main(String[] args) {
