@@ -1,4 +1,4 @@
-package a08_02_lista_ordenada_interface;
+package a09_02_busca_binaria;
 
 public class ListaOrdenada<T extends Comparable<T>> implements Lista<T> {
     private Object[] arranjo = new Object[20];
@@ -40,7 +40,7 @@ public class ListaOrdenada<T extends Comparable<T>> implements Lista<T> {
             for (int i = 0; i < arranjo.length; ++i) {
                 novoArranjo[i] = arranjo[i];
             }
-            arranjo = novoArranjo;
+            arranjo = (T[]) novoArranjo;
         }
 
     }
@@ -67,16 +67,35 @@ public class ListaOrdenada<T extends Comparable<T>> implements Lista<T> {
             total--;
         }
     }
-   
+
     @Override
     public int busca(T elemento) {
-        for (int i = 0; i < arranjo.length; i++) {
-            if (elemento.equals(arranjo[i])) {
-                return i;
+        int instrucoes = 0;
+
+        int esquerda = 0;
+        int direita = total - 1;
+        try {
+            while (esquerda <= direita) {
+                int meio = (esquerda + direita) / 2;
+                instrucoes++;
+                int result = elemento.compareTo((T) arranjo[meio]);
+                if (result == 0) {
+                    return meio;
+                } else if (result < 0) {
+                    // Se o elemento procurado for menor que o meio, 
+                    // vai pra esquerda
+                    direita = meio - 1;
+                } else {
+                    // Se o elemento procurado for meior que o meio, 
+                    // vai pra direita
+                    esquerda = meio + 1;
+                }
             }
+            return -1;
+        } finally {
+            System.out.println("Instrucoes: " + instrucoes);
         }
-        return -1;
-    }    
+    }
 
     @Override
     public String toString() {
